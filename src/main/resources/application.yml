@@ -1,0 +1,49 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/enterprise_ai
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  ai:
+
+    model:
+      chat: google-genai
+      embedding:
+        text: google-genai
+
+    google:
+      genai:
+
+        api-key: ${GOOGLE_API_KEY}
+
+        chat:
+          options:
+            model: gemini-2.5-flash
+
+        embedding:
+          api-key: ${GOOGLE_EMBEDDING_API_KEY}
+
+          text:
+            model: gemini-embedding-001
+
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 768
+        index-type: none
+        distance-type: cosine_distance
+        table-name: vector_store
+
+app:
+  storage:
+    upload-path: C:/EnterpriseAI/uploads
